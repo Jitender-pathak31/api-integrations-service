@@ -68,12 +68,13 @@ Base URL: `http://localhost:8081/api/integrations/posts`
 
 ### Step 1: Start the Service
 
-> Configured on **port `8081`** so it will not conflict with `person-contact-manager` on port `8080`.
+From the project root directory:
 
 ```bash
-cd /home/jeet/projects/api-integrations-service
 ./mvnw spring-boot:run
 ```
+
+*(Runs on `http://localhost:8081` by default.)*
 
 ---
 
@@ -105,7 +106,7 @@ curl -i -X PUT http://localhost:8081/api/integrations/posts/1 \
   -d '{
     "title": "Spring Boot API Integration Guide",
     "body": "We fetched this record from a third-party API, edited its content locally, and re-exposed it.",
-    "curatorNotes": "Reviewed and edited by Jeet",
+    "curatorNotes": "Reviewed and approved for public API",
     "approved": true
   }'
 ```
@@ -124,6 +125,6 @@ curl -s "http://localhost:8081/api/integrations/posts?approvedOnly=true"
 
 ### Step 3: Inspect the Local H2 Database Console
 1. Open `http://localhost:8081/h2-console` in your browser.
-2. Set **JDBC URL** to `jdbc:h2:mem:integrationsdb`, **User Name** to `sa`, leave **Password** empty, and click **Connect**.
+2. Connect using H2's standard in-memory defaults (**JDBC URL**: `jdbc:h2:mem:integrationsdb`, default H2 user `sa`, no password).
 3. Run `SELECT * FROM INTEGRATED_POST;` to see both your edited and unedited records.
 
